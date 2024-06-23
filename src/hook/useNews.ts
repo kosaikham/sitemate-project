@@ -1,11 +1,7 @@
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import {NewsType, fetchNews} from '../api/news';
 
-export type SearchQuery = {
-  text: string;
-};
-
-const useNews = ({text}: SearchQuery) => {
+const useNews = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [news, setNews] = useState<NewsType[]>([]);
@@ -24,14 +20,11 @@ const useNews = ({text}: SearchQuery) => {
     }
   };
 
-  useEffect(() => {
-    onLoadNews(text);
-  }, []);
-
   return {
     news,
     error,
     loading,
+    onLoadNews,
   };
 };
 
